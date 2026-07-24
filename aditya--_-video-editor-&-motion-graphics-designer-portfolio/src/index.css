@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-brand-green: #D7FF4A;
+  --color-brand-purple: #8B5CF6;
+  --color-bg-dark: #050505;
+  --color-surface-dark: #111111;
+  --color-card-dark: #181818;
+  --color-border-dark: rgba(255, 255, 255, 0.08);
+}
+
+/* Base body styles */
+body {
+  background-color: var(--color-bg-dark);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar Styling (Matching Brand Green Button Color) */
+html {
+  scrollbar-color: #D7FF4A #050505;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-dark);
+  border-left: 1px solid rgba(215, 255, 74, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-green);
+  border-radius: 9999px;
+  border: 2px solid var(--color-bg-dark);
+  box-shadow: 0 0 10px rgba(215, 255, 74, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e2ff73;
+  box-shadow: 0 0 16px rgba(215, 255, 74, 0.8);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #c2f524;
+}
+
+/* Custom noise overlay to give a film/cinematic grain */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  content: "";
+  opacity: 0.015;
+  z-index: 9999;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Premium shine animation for buttons */
+@keyframes shine {
+  100% {
+    left: 125%;
+  }
+}
+
+.hover-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+}
+
+.hover-shine:hover::after {
+  animation: shine 0.85s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
